@@ -25,7 +25,12 @@ return;
             continue;
     }
     else{
-inItem+=`<label><input type="checkbox"class="item1"  name="skills" value="${localStorage.getItem(localStorage.key(i))}">${localStorage.getItem(localStorage.key(i))}</label><br>`
+        const rawHTML=decodeURIComponent(localStorage.getItem(localStorage.key(i)));
+        const escaped = rawHTML
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+inItem+=`<label><input type="checkbox"class="item1"  name="skills" value="${localStorage.getItem(localStorage.key(i))}">${escaped}</label><br>`
     }
     }
 itemList.innerHTML=inItem;
@@ -42,12 +47,38 @@ const removeITEM=()=>{
     i++;
    })
    showItem();
+   location.reload();
 }
 showItem();
 const addItem=()=>{
      let item=document.getElementById('addNewItem');
      len=len+1;
-     localStorage.setItem(len,item.value);
+     localStorage.setItem(len,encodeURIComponent(item.value));
 
      showItem();s
 }
+const clearList=()=>{
+    localStorage.clear();
+    showItem();
+    location.reload();
+}
+const modal = document.getElementById('exampleModal');
+
+  modal.addEventListener('hidden.bs.modal', function () {
+    const inputs = modal.querySelectorAll('input, textarea');
+    inputs.forEach(input => input.value = '');
+  });
+  var backColor="#b3aaaa";
+  const changeBackground=()=>{
+    if(backColor=="#b3aaaa"){
+        console.log("backgorund white")
+        document.body.style.background="white"
+        backColor="white"
+    }
+    else{
+        console.log("background black")
+        document.body.style.background="#b3aaaa"
+        backColor="#b3aaaa"
+    }
+  }
+  
