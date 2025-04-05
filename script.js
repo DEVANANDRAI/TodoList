@@ -68,17 +68,21 @@ const modal = document.getElementById('exampleModal');
     const inputs = modal.querySelectorAll('input, textarea');
     inputs.forEach(input => input.value = '');
   });
-  var backColor="#b3aaaa";
-  const changeBackground=()=>{
+  let backColor="#b3aaaa";
+  let changeBackground=document.getElementById("changeBack");
+changeBack.addEventListener('click',(event)=>{
+    event.preventDefault();
     if(backColor=="#b3aaaa"){
-        console.log("backgorund white")
+        
         document.body.style.background="white"
         backColor="white"
     }
-    else{
-        console.log("background black")
+    else{ 
         document.body.style.background="#b3aaaa"
         backColor="#b3aaaa"
+        
     }
-  }
+  })
+ 
+ 
   
